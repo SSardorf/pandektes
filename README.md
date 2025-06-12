@@ -1,3 +1,9 @@
+How to run the project:
+
+```bash
+docker-compose up --build
+```
+
 How to upload a file:
 
 ```bash
