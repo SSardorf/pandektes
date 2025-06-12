@@ -1,17 +1,23 @@
 import {
   Controller,
+  Get,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AppService, Data } from './app.service';
+import { DocumentService } from './document/document.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly documentService: DocumentService,
+  ) {}
 
-  @Post('upload')
+  @Post('document')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     let data: Data;
@@ -25,15 +31,15 @@ export class AppController {
       };
     }
 
-    console.log(data);
-
-    console.log('TODO: Save data to database');
+    const id = await this.documentService.saveDocument(data);
 
     return {
-      message: 'File uploaded successfully',
-      filename: file.originalname,
-      size: file.size,
-      mimetype: file.mimetype,
+      id: id,
     };
+  }
+
+  @Get('document/:id')
+  async getDocumentById(@Param('id') id: string) {
+    return await this.documentService.getDocumentById(parseInt(id));
   }
 }
