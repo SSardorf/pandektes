@@ -7,7 +7,7 @@ docker-compose up --build
 How to upload a file:
 
 ```bash
-curl -X POST -F "file=@your-file.txt" http://localhost:3000/upload
+curl -X POST -F "file=@your-file.txt" http://localhost:3000/document
 ```
 
 <p align="center">
