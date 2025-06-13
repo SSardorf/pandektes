@@ -21,9 +21,6 @@ services:
     ports:
       - '3000:3000'
     command: pnpm start:prod
-    volumes:
-      - .:/app
-      - /app/node_modules
 
 volumes:
   db_data:

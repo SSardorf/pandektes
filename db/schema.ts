@@ -1,3 +1,4 @@
+import { InferSelectModel } from 'drizzle-orm';
 import { pgTable, serial, text } from 'drizzle-orm/pg-core';
 
 export const documentsTable = pgTable('documents', {
@@ -10,3 +11,5 @@ export const documentsTable = pgTable('documents', {
   caseNumber: text(),
   summaryAndConclusion: text(),
 });
+
+export type DocumentSelect = InferSelectModel<typeof documentsTable>;
